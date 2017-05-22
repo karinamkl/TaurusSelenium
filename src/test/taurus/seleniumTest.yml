@@ -1,0 +1,36 @@
+---
+execution:
+- executor: selenium
+  concurrency: 100 #supported only in  cloud
+  ramp-up: 1m
+  hold-for: 5m
+  iterations: 5
+  runner: testng
+  scenario: test
+
+services:
+
+scenarios:
+  test:
+    browser: Chrome
+    think-time: 1s500ms
+    script: C:\Users\kmaklakova\IdeaProjects\TaurusDemo\src\test\java
+    additional-classpath:
+    - C:/Users/kmaklakova/Documents/jars/selenide/selenide-4.4.3.jar
+
+  modules:
+  selenium:
+    selenium-tools:
+      testng:
+        path: ~/.bzt/selenium-taurus/tools/testng/testng.jar  # TestNG jar
+        selenium-server: ~/.bzt/selenium-taurus/selenium-servr.jar  # path to Selenium Standalone Server
+        hamcrest-core: ~/.bzt/selenium-taurus/tools/junit/hamcrest-core.jar  # path to Hamcrest lib
+        json-jar: ~/.bzt/selenium-taurus/tools/junit/json.jar  # path to JSON lib
+        jar-name: compiled.jar # set name of jar file when compiling from java source files
+        working-dir: classes  # set name of runner working directory within artifacts dir
+        compile-target-java: 1.8  # -source and -target option value for javac
+
+reporting:
+- module: blazemeter
+
+
